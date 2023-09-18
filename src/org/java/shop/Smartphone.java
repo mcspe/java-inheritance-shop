@@ -25,8 +25,7 @@ public class Smartphone extends Prodotto {
 	}
 	
 	public String getImei() {
-		String strImei = String.format("%015d", imei);
-		return String.format("%8c.%6c.%1c", strImei);
+		return String.format("%015d", imei);
 	}
 	
 	public void setMemoria(int memoria) {
@@ -45,14 +44,14 @@ public class Smartphone extends Prodotto {
 	@Override
 	public String toString() {
 		return "Categoria: " + getCat() + 
-				"\\nMarca: " + getMarca() + 
-				"\\nNome: " + getNome() + 
-				"\\nCodice Prodotto: " + getCodice() + 
-				"\\nCodice IMEI: " + getImei() +
-				"\\nMemoria: " + getMemoria() + "GB" +
-				"\\nPrezzo base: " + getPrezzoBase() + "€" +
-				"\\nIva: " + getIva() + "%" + 
-				"\\nPrezzo :" + getPrezzoConIva() + "€";
+				"\nMarca: " + getMarca() + 
+				"\nNome: " + getNome() + 
+				"\nCodice Prodotto: " + getCodice() + 
+				"\nCodice IMEI: " + getImei() +
+				"\nMemoria: " + getMemoria() + "GB" +
+				"\nPrezzo base: " + getPrezzoBase() + "€" +
+				"\nIva: " + getIva() + "%" + 
+				"\nPrezzo: " + getPrezzoConIva() + "€";
 	}
 	
 }

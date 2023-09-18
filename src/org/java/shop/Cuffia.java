@@ -11,6 +11,11 @@ public class Cuffia extends Prodotto {
 		setWireless(wireless);
 	}
 	
+	@Override
+	protected void setCodice() {
+		codice = "Pn_cf_" + String.format("%06d", ++contProd);
+	}
+	
 	public void setColore(String colore) {
 		this.colore = colore;
 	}
@@ -35,14 +40,14 @@ public class Cuffia extends Prodotto {
 	@Override
 	public String toString() {
 		return "Categoria: " + getCat() + 
-				"\\nMarca: " + getMarca() + 
-				"\\nNome: " + getNome() + 
-				"\\nCodice Prodotto: " + getCodice() + 
-				"\\nColore: " + getColore() + "\"" +
+				"\nMarca: " + getMarca() + 
+				"\nNome: " + getNome() + 
+				"\nCodice Prodotto: " + getCodice() + 
+				"\nColore: " + getColore() + "\"" +
 				(isWireless() ? "\\nWireless" : "\\nCablate") +
-				"\\nPrezzo base: " + getPrezzoBase() + "€" +
-				"\\nIva: " + getIva() + "%" + 
-				"\\nPrezzo :" + getPrezzoConIva() + "€";
+				"\nPrezzo base: " + getPrezzoBase() + "€" +
+				"\nIva: " + getIva() + "%" + 
+				"\nPrezzo: " + getPrezzoConIva() + "€";
 	}
 
 }

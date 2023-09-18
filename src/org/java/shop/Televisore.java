@@ -11,6 +11,11 @@ public class Televisore extends Prodotto {
 		setSmart(smart);
 	}
 
+	@Override
+	protected void setCodice() {
+		codice = "Pn_tv_" + String.format("%06d", ++contProd);
+	}
+	
 	public void setDimensioni(int dimensioni) {
 		this.dimensioni = dimensioni;
 	}
@@ -35,14 +40,14 @@ public class Televisore extends Prodotto {
 	@Override
 	public String toString() {
 		return "Categoria: " + getCat() + 
-				"\\nMarca: " + getMarca() + 
-				"\\nNome: " + getNome() + 
-				"\\nCodice Prodotto: " + getCodice() + 
+				"\nMarca: " + getMarca() + 
+				"\nNome: " + getNome() + 
+				"\nCodice Prodotto: " + getCodice() + 
 				(isSmart() ? "\\nSmartTV " : "") +
-				"\\nDimensioni: " + getDimensioni() + "\"" +
-				"\\nPrezzo base: " + getPrezzoBase() + "€" +
-				"\\nIva: " + getIva() + "%" + 
-				"\\nPrezzo :" + getPrezzoConIva() + "€";
+				"\nDimensioni: " + getDimensioni() + "\"" +
+				"\nPrezzo base: " + getPrezzoBase() + "€" +
+				"\nIva: " + getIva() + "%" + 
+				"\nPrezzo: " + getPrezzoConIva() + "€";
 	}
 	
 }
