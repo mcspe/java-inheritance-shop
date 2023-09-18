@@ -2,8 +2,8 @@ package org.java.shop;
 
 public class Prodotto {
 	
-	private String codice;
-	private static int contProd = 0;
+	protected String codice;
+	protected static int contProd = 0;
 	private String nome;
 	private String marca;
 	private double prezzo;
@@ -17,7 +17,7 @@ public class Prodotto {
 		setIva(iva);
 	}
 	
-	private void setCodice() {
+	protected void setCodice() {
 		codice = "Pn_" + String.format("%06d", ++contProd);
 	}
 	
@@ -45,10 +45,15 @@ public class Prodotto {
 		this.prezzo = prezzo;
 	}
 	
-	public double getPrezzo() {
+	public double getPrezzoBase() {
 		return prezzo;
 	}
-	
+
+	public double getPrezzoConIva() {
+		double vatAmount = Math.round(prezzo * iva / 100);
+		return prezzo + vatAmount;
+	}
+
 	public void setIva(int iva) {
 		this.iva = iva;
 	}
@@ -57,9 +62,18 @@ public class Prodotto {
 		return iva;
 	}
 	
-	public double getPrezzoConIva() {
-		double vatAmount = Math.round(prezzo * iva / 100);
-		return prezzo + vatAmount;
+	protected String getCat() {
+		return "General";
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Categoria: " + getCat() + 
+				"\\nMarca: " + getMarca() + 
+				"\\nNome: " + getNome() + 
+				"\\nCodice Prodotto: " + getCodice() + 
+				"\\nPrezzo base: " + getPrezzoBase() + "€" +
+				"\\nIva: " + getIva() + "%" + 
+				"\\nPrezzo :" + getPrezzoConIva() + "€";
+	}
 }
