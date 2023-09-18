@@ -9,7 +9,6 @@ public class Smartphone extends Prodotto {
 	
 	public Smartphone(String nome, String marca, double prezzo, int iva, int memoria) {
 		super(nome, marca, prezzo, iva);
-//		setCodice();
 		setImei();
 		setMemoria(memoria);
 	}
@@ -37,6 +36,11 @@ public class Smartphone extends Prodotto {
 	}
 	
 	@Override
+	protected void setSconto() {
+		sconto = (memoria <= 32) ? 2 : 5;
+	}
+	
+	@Override
 	protected String getCat() {
 		return "Smartphone";
 	}
@@ -49,9 +53,10 @@ public class Smartphone extends Prodotto {
 				"\nCodice Prodotto: " + getCodice() + 
 				"\nCodice IMEI: " + getImei() +
 				"\nMemoria: " + getMemoria() + "GB" +
-				"\nPrezzo base: " + getPrezzoBase() + "€" +
+				"\nPrezzo base: " + df.format(getPrezzoBase()) + "€" +
 				"\nIva: " + getIva() + "%" + 
-				"\nPrezzo: " + getPrezzoConIva() + "€";
+				"\nPrezzo :" + df.format(getPrezzoConIva()) + "€" +
+				((scontato) ? ("\nPrezzo con Tessera Fedeltà : " + df.format(getPrezzoScontato())) : "");
 	}
 	
 }

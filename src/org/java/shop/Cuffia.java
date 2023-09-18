@@ -33,6 +33,11 @@ public class Cuffia extends Prodotto {
 	}
 	
 	@Override
+	protected void setSconto() {
+		sconto = (wireless) ? 2 : 7;
+	}
+	
+	@Override
 	protected String getCat() {
 		return "Cuffie";
 	}
@@ -44,10 +49,11 @@ public class Cuffia extends Prodotto {
 				"\nNome: " + getNome() + 
 				"\nCodice Prodotto: " + getCodice() + 
 				"\nColore: " + getColore() + "\"" +
-				(isWireless() ? "\\nWireless" : "\\nCablate") +
-				"\nPrezzo base: " + getPrezzoBase() + "€" +
+				(isWireless() ? "\nWireless" : "\nCablate") +
+				"\nPrezzo base: " + df.format(getPrezzoBase()) + "€" +
 				"\nIva: " + getIva() + "%" + 
-				"\nPrezzo: " + getPrezzoConIva() + "€";
+				"\nPrezzo :" + df.format(getPrezzoConIva()) + "€" +
+				((scontato) ? ("\nPrezzo con Tessera Fedeltà : " + df.format(getPrezzoScontato())) : "");
 	}
 
 }

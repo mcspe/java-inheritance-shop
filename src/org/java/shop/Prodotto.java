@@ -1,5 +1,7 @@
 package org.java.shop;
 
+import java.text.DecimalFormat;
+
 public class Prodotto {
 	
 	protected String codice;
@@ -7,7 +9,10 @@ public class Prodotto {
 	private String nome;
 	private String marca;
 	private double prezzo;
+	protected boolean scontato;
+	protected int sconto;
 	private int iva;
+	protected final DecimalFormat df = new DecimalFormat("0.00");
 	
 	public Prodotto(String nome, String marca, double prezzo, int iva) {
 		setCodice();
@@ -15,10 +20,15 @@ public class Prodotto {
 		setMarca(marca);
 		setPrezzo(prezzo);
 		setIva(iva);
+		setSconto();
 	}
 	
 	protected void setCodice() {
 		codice = "Pn_" + String.format("%06d", ++contProd);
+	}
+	
+	protected void setScontato(boolean scontato) {
+		this.scontato = scontato;
 	}
 	
 	public String getCodice() {
@@ -50,8 +60,17 @@ public class Prodotto {
 	}
 
 	public double getPrezzoConIva() {
-		double vatAmount = Math.round(prezzo * iva / 100);
+		double vatAmount = getPrezzoBase() * getIva() / 100;
 		return prezzo + vatAmount;
+	}
+	
+	protected void setSconto() {
+		sconto = 2;
+	}
+	
+	public double getPrezzoScontato() {
+		double base = getPrezzoConIva();
+		return base * (100 - sconto) / 100;
 	}
 
 	public void setIva(int iva) {
@@ -69,11 +88,12 @@ public class Prodotto {
 	@Override
 	public String toString() {
 		return "Categoria: " + getCat() + 
-				"\\nMarca: " + getMarca() + 
-				"\\nNome: " + getNome() + 
-				"\\nCodice Prodotto: " + getCodice() + 
-				"\\nPrezzo base: " + getPrezzoBase() + "€" +
-				"\\nIva: " + getIva() + "%" + 
-				"\\nPrezzo :" + getPrezzoConIva() + "€";
+				"\nMarca: " + getMarca() + 
+				"\nNome: " + getNome() + 
+				"\nCodice Prodotto: " + getCodice() + 
+				"\nPrezzo base: " + df.format(getPrezzoBase()) + "€" +
+				"\nIva: " + getIva() + "%" + 
+				"\nPrezzo :" + df.format(getPrezzoConIva()) + "€" +
+				((scontato) ? ("\nPrezzo con Tessera Fedeltà : " + df.format(getPrezzoScontato())) : "");
 	}
 }

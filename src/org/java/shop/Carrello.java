@@ -1,5 +1,6 @@
 package org.java.shop;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Carrello {
@@ -7,6 +8,7 @@ public class Carrello {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
+		final DecimalFormat df = new DecimalFormat("0.00");
 		
 		boolean addProd = true;
 		
@@ -29,7 +31,7 @@ public class Carrello {
 			String nome = sc.nextLine();
 			
 			System.out.print("\nInserisci il prezzo base: ");
-			float prezzo = Float.valueOf(sc.nextLine());
+			double prezzo = Double.valueOf(sc.nextLine());
 			
 			System.out.print("\nInserisci l'aliquota IVA: ");
 			int iva = Integer.valueOf(sc.nextLine());
@@ -74,15 +76,20 @@ public class Carrello {
 		sc.close();
 		
 		Prodotto[] cart = new Prodotto[counter + 1];
+		double cartTot = 0;
 		for (int i = 0; i <= counter; i++) {
 			cart[i] = cartProv[i];
+			cart[i].setScontato(fidelty);
 			System.out.println("\n"
 					+ "Item Carrello n."
 					+ (i + 1)
 					+ "\n"
 					+ cart[i]);
+			cartTot += (fidelty) ? cart[i].getPrezzoScontato() :  cart[i].getPrezzoConIva();
 		}
 		cartProv = null;
+		
+		System.out.println("\nPrezzo totale: " + df.format(cartTot) + "€");
 		
 		
 

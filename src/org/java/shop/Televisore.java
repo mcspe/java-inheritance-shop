@@ -33,6 +33,11 @@ public class Televisore extends Prodotto {
 	}
 	
 	@Override
+	protected void setSconto() {
+		sconto = (!smart) ? 2 : 10;
+	}
+	
+	@Override
 	protected String getCat() {
 		return "TV";
 	}
@@ -45,9 +50,10 @@ public class Televisore extends Prodotto {
 				"\nCodice Prodotto: " + getCodice() + 
 				(isSmart() ? "\\nSmartTV " : "") +
 				"\nDimensioni: " + getDimensioni() + "\"" +
-				"\nPrezzo base: " + getPrezzoBase() + "€" +
+				"\nPrezzo base: " + df.format(getPrezzoBase()) + "€" +
 				"\nIva: " + getIva() + "%" + 
-				"\nPrezzo: " + getPrezzoConIva() + "€";
+				"\nPrezzo :" + df.format(getPrezzoConIva()) + "€" +
+				((scontato) ? ("\nPrezzo con Tessera Fedeltà : " + df.format(getPrezzoScontato())) : "");
 	}
 	
 }
