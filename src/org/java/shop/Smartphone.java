@@ -9,7 +9,7 @@ public class Smartphone extends Prodotto {
 	
 	public Smartphone(String nome, String marca, double prezzo, int iva, int memoria) {
 		super(nome, marca, prezzo, iva);
-		setCodice();
+//		setCodice();
 		setImei();
 		setMemoria(memoria);
 	}
